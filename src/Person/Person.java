@@ -1,17 +1,27 @@
 package Person;
 
 public class Person {
-    private final boolean man;
+    private final Gender gender;
     private final String name;
-    private Person spouse;
+    private Person spouse;   
 
-    public Person ( boolean man, String name ) {
-        this.man = man;
+    public Person getSpouse () {
+        return spouse;
+    }
+
+    public void setSpouse ( Person spouse ) {
+        this.spouse = spouse;
+    }
+
+
+
+    public Person ( Gender gender, String name ) {
+        this.gender = gender;
         this.name = name;
     }
 
-    public Person ( boolean man, String name, Person spouse) {
-        this.man = man;
+    public Person ( Gender gender, String name, Person spouse) {
+        this.gender = gender;
         this.name = name;
         this.spouse = spouse;
 
@@ -25,11 +35,11 @@ public class Person {
      * person and they are not husband and wife, false otherwise
      */
     public boolean Marry(Person person) {
-        if (man != person.man){
-            if (spouse == person.spouse) return false;
-            if (spouse != null) Divorce ();
-            if (person.spouse != null) Divorce ();
-            spouse = person.spouse;
+        if (gender != person.gender){
+            if (spouse == person.spouse && spouse != null) return false;
+            this.Divorce ();
+            person.Divorce ();
+            spouse = person;
             person.spouse = this;
             return true;
         }
